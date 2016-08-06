@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ContactsApp.Models.ContactViewModel>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<br />
+
+<button class="btn">
+    @Html.ActionLink("Add new Contact", "AddContact")
+</button>
+
+<br />
+<br />
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete?</th>
+    </tr>
+    @foreach (var contact in Model)
+    {
+        <tr>
+            <td>@contact.ContactID</td>
+            <td>@contact.Surname, @contact.Name</td>
+            <td>@contact.Age</td>
+            <td>@contact.Address</td>
+            <td>
+                <button class="btn btn-warning"´>
+                    @Html.ActionLink("Edit", "EditContact",
+                        new
+                        {
+                            ContactID = contact.ContactID,
+                            Name = contact.Name,
+                            Surname = contact.Surname,
+                            Age = contact.Age,
+                            Address = contact.Address
+                        })
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-danger">
+                    @Html.ActionLink("Delete", "DeleteContact",
+                        new
+                        {
+                            ContactID = contact.ContactID,
+                            Name = contact.Name,
+                            Surname = contact.Surname,
+                            Age = contact.Age,
+                            Address = contact.Address
+                        })
+                </button>
+            </td>
+        </tr>
+    }
+</table>
